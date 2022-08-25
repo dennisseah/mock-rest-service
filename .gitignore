@@ -1,0 +1,5 @@
+build/**
+node_modules/**
+nip
+.nyc_output
+yarn-error.log

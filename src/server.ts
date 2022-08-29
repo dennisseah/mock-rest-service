@@ -2,16 +2,18 @@ import http from "http";
 import express, { Express } from "express";
 import morgan from "morgan";
 import routes from "./routes/jobs";
+import { Authentication } from "./services/authentication";
 
 const router: Express = express();
+const authentication = new Authentication();
 
 router.use(morgan("dev"));
 router.use(express.urlencoded({ extended: false }));
 router.use(express.json());
 
 router.use((req, res, next) => {
-    if (!req.headers.authorization) {
-        return res.status(403).json({ error: "No credentials sent!" });
+    if (!authentication.act(req)) {
+        return res.status(403).end();
     }
     next();
 });

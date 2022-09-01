@@ -1,0 +1,6 @@
+version: "3"
+services:
+    mock-service:
+        image: denz/mock-rest-service
+        ports:
+            - 8080:6060
